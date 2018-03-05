@@ -23,14 +23,14 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 public class POSTController {
 
 	
-	@Value("${AWS_API_KEY}")
+	@Value("${AWSAPIKEY}")
 	String apiKey;
 	
-	@Value("${AWS_SECRET_KEY}")
+	@Value("${AWSSECRETKEY}")
 	String secretKey;
 	
 	
-	@Value("${BUCKET_NAME}")
+	@Value("${BUCKETNAME}")
 	String bucketName;
 	
 	@GetMapping(value = "/")

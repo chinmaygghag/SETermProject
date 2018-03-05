@@ -25,16 +25,19 @@
 	</a> </nav>
 
 
-	<div class="row" style="border: 5px; padding: 5px;">
+	<div class="row" style="borderTop: 5px; padding: 15px;">
 		<div class="col-md-3">
 			<img alt="Profile Page Image" src="${imgSrc }" height="300"
-				width="300"
-				style="border: 5px solid; border-color: LightGray; border-radius: 10px; padding: 10px;">
+				width="300" class="img-fluid img-thumbnail">
 		</div>
 		<div class="col-md-8">
 			<div class="container">
-				<h1>Hello</h1>
-				<h2>asdasdadasdsadsadxsadsadsdsadadd</h2>
+				<h3>Chinmay Ghag</h3>
+				<h5>Currently Pursuing Master's in
+					Computer Science from University at Albany and this is SE
+					Assignment 2<br> </h5>
+					
+				<a href="/">If You Want to upload another image you can go here</a>	
 			</div>
 		</div>
 	</div>
