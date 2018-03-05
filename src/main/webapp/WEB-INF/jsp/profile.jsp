@@ -33,11 +33,10 @@
 		<div class="col-md-8">
 			<div class="container">
 				<h3>Chinmay Ghag</h3>
-				<h5>Currently Pursuing Master's in
-					Computer Science from University at Albany and this is SE
-					Assignment 2<br> </h5>
-					
-				<a href="/">If You Want to upload another image you can go here</a>	
+				<h5>
+					Currently Pursuing Master's in Computer Science from University at
+					Albany and this is SE Assignment 2<br>
+				</h5>
 			</div>
 		</div>
 	</div>
