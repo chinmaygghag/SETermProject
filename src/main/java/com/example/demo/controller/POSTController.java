@@ -22,7 +22,6 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 @Controller
 public class POSTController {
 
-	
 	@Value("${AWSAPIKEY}")
 	String apiKey;
 	
@@ -33,13 +32,6 @@ public class POSTController {
 	@Value("${BUCKETNAME}")
 	String bucketName;
 	
-	@GetMapping(value = "/")
-	public ModelAndView renderPage() {
-		ModelAndView indexPage = new ModelAndView();
-		indexPage.setViewName("index");
-		return indexPage;
-	}
-
 	@PostMapping(value = "/upload")
 	public ModelAndView uploadtoS3(@RequestParam("file") MultipartFile image) {
 		ModelAndView profilePage = new ModelAndView();

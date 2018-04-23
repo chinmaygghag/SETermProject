@@ -16,7 +16,7 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-
+	<%@ include file="drawer.jsp"%>
 	<!-- Image and text -->
 	<nav class="navbar navbar-light bg-light"> <a
 		class="navbar-brand" href="#"> <img src="apple-touch-icon.png"
@@ -27,15 +27,14 @@
 
 	<div class="row" style="borderTop: 5px; padding: 15px;">
 		<div class="col-md-3">
-			<img alt="Profile Page Image" src="${imgSrc }" height="300"
+			<img alt="Profile Page Image" src="${profileImageName}" height="300"
 				width="300" class="img-fluid img-thumbnail">
 		</div>
 		<div class="col-md-8">
 			<div class="container">
-				<h3>Chinmay Ghag</h3>
+				<h3>"${name}"</h3>
 				<h5>
-					Currently Pursuing Master's in Computer Science from University at
-					Albany and this is SE Assignment 2<br>
+					${description}<br>
 				</h5>
 			</div>
 		</div>
