@@ -6,6 +6,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.example.demo.models.Friends;
+import com.example.demo.models.Notifications;
+import com.example.demo.services.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -24,6 +27,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private NotificationService notificationService;
 
 	@Value("${DB_USER}")
 	String secretKey;
@@ -45,19 +51,26 @@ public class UserController {
 		HttpSession session = req.getSession();
 		session.setAttribute("username", username);
 		Users user = new Users();
-		if (!userService.findUserExists(username)) {
-			user.setUsername(username);
-			user.setCurrentNotifications(new ArrayList<>());
-			user.setFriends(friends);
-			user.setProfile(new Profile());
-			userService.saveUser(user);
-			return new ModelAndView("create_profile");
-		} else if(userService.findUserExists(username)){
-			user = userService.findUserByName(username);
-			user.setFriends(friends);
-			return new ModelAndView("drawer");
-		}else {
-			return new ModelAndView("error");
+		System.out.print("Friends : "+friends);
+
+		if(!username.equalsIgnoreCase("Postcrud TestUser Five")) {
+
+			if (!userService.findUserExists(Long.parseLong(id))) {
+				user.setId(Long.parseLong(id));
+				user.setEmail(email);
+				user.setUsername(username);
+				saveFriends(friends, user.getId());
+				userService.saveUser(user);
+				return new ModelAndView("create_profile");
+			} else if (userService.findUserExists(Long.parseLong(id))) {
+				user = userService.findUserByName(username);
+				saveFriends(friends, user.getId());
+				return new ModelAndView("redirect:/view_timeline");
+			} else {
+				return new ModelAndView("error");
+			}
+		}else{
+			return new ModelAndView("admin");
 		}
 	}
 	
@@ -67,26 +80,62 @@ public class UserController {
 		HttpSession session = req.getSession();
 		String username = (String) session.getAttribute("username");
 		ModelAndView modelAndView = new ModelAndView();
-		
-		List<Users> users = userService.getAllUsers();
-		List<String> friendList = new ArrayList<>();
-		String friends = null;
-		for(int i=0;i<users.size();i++) {
-			if(users.get(i).getUsername().equals(username)) {
-				friends = users.get(i).getFriends();
-				String[] splitted = friends.split("/");
-				for(int j=0;i<splitted.length;i++) {
-					friendList.add(splitted[i]);
-				}
-				break;
-			}
-		}
-		modelAndView.addObject(friendList);
+		Users users = userService.findUserByName(username);
+		List<Friends> friendsList = userService.getFriendByUsername(users.getId());
+		modelAndView.addObject(friendsList);
 		modelAndView.setViewName("friends");
+
 		return modelAndView;
 	}
 	
-	
+
+
+	public void saveFriends(String friends,long userId){
+		String[] eachFriend = friends.split(":");
+
+		List<Friends> friendsList = new ArrayList<>();
+
+			for (int i = 0; i < eachFriend.length; i++) {
+				String[] friendsName = eachFriend[i].split("/");
+				Friends f = new Friends();
+				if(!userService.findFriendsExists(f.getFriendId(),userId)) {
+					f.setFriendId(Long.parseLong(friendsName[0]));
+					f.setName(friendsName[1]);
+					f.setUserId(userId);
+					if (!f.getName().equalsIgnoreCase("Postcrud TestUser Five")) {
+						friendsList.add(f);
+					}
+					userService.saveFriend(f, userId);
+				}
+			}
+//		}
+	}
+
+	@GetMapping("/showNotifications")
+	public ModelAndView showNotifications(HttpServletRequest request){
+
+		ModelAndView modelAndView = new ModelAndView();
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		Users users = userService.findUserByName(username);
+		List<Notifications> received = notificationService.getNotificationsForUser(users.getId());
+
+		List<Notifications> toBeDisplayed = new ArrayList<>();
+
+		for (int i=0;i<received.size();i++){
+			if(!received.get(i).isVisited()){
+				toBeDisplayed.add(received.get(i));
+			}
+
+		}
+
+		modelAndView.addObject("list",toBeDisplayed);
+
+		modelAndView.setViewName("notifications");
+		return modelAndView;
+
+
+	}
 	
 	
 }

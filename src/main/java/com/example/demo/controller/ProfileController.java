@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.example.demo.models.Users;
+import com.example.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,9 @@ public class ProfileController {
 	@Autowired
 	ProfileService service;
 
+	@Autowired
+	UserService userService;
+
 	@Value("${AWSAPIKEY}")
 	String apiKey;
 	
@@ -49,7 +54,10 @@ public class ProfileController {
 		
 		HttpSession session = req.getSession();
 		String username = (String) session.getAttribute("username");
-		
+
+		Users user = userService.findUserByName(username);
+
+
 		ModelAndView profilePage = new ModelAndView();
 		BasicAWSCredentials cred = new BasicAWSCredentials(apiKey,
 				secretKey);
@@ -65,11 +73,12 @@ public class ProfileController {
 			profilePage.addObject("imgSrc", imgSrc);
 
 			profilePage.setViewName("redirect:/getProfile");
-			
+
 			Profile profile = new Profile();
 			profile.setName(name);
 			profile.setProfileImageName(imgSrc);
 			profile.setUsername(username);
+			profile.setUserId(user.getId());
 			profile.setDescription(desc);
 			service.saveProfile(profile);
 			return profilePage;
@@ -98,6 +107,5 @@ public class ProfileController {
 		return profilePageView;
 	}
 
-	
-	
+
 }

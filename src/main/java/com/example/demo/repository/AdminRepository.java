@@ -8,4 +8,5 @@ import com.example.demo.models.Admin;
 @Repository
 public interface AdminRepository extends CrudRepository<Admin, Integer> {
 
+
 }

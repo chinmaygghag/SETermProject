@@ -79,11 +79,9 @@
 			version : 'v2.8'
 		});
 
-		FB.AppEvents.logPageView();
-
-		FB.getLoginStatus(function(response) {
-			statusChangeCallback(response);
-		});
+        FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+        });
 
 	};
 
@@ -113,26 +111,28 @@
 									console.log(ele.name);
 									console.log(ele.id);
 									var prevUser = $('[name="friends"]').val();
-									$('[name="friends"]').val(prevUser + ele.id + "/" + ele.name + "/");
+									$('[name="friends"]').val(prevUser + ele.id + "/" + ele.name + ":");
 								});
 								$("#redirectForm").submit();
 							});
 						});
 
 		}
-</script>
-
-</head>
+		</script>
+	</head>
 
 <body id="page-top">
 
 	<nav class="navbar navbar-dark bg-light justify-content-between">
 		<a class="navbar-brand">PostCrud</a>
-		<div class="fb-login-button" data-max-rows="1" data-size="large"
-			data-button-type="continue_with" data-show-faces="false"
-			data-auto-logout-link="true" data-use-continue-as="false"
-			onlogin='checkLoginState();'
-			></div>
+		<fb:login-button data-max-rows="1"
+						 data-size="large"
+						 data-button-type="continue_with"
+						 data-show-faces="false"
+						 data-auto-logout-link="true"
+						 data-use-continue-as="false"
+						 scope="public_profile,email,user_friends" onlogin="checkLoginState();">
+		</fb:login-button>
 	</nav>
 
 	<div class="container" style="margin: 15px">

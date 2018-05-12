@@ -5,35 +5,31 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 </head>
 <body>
 
 	<%@ include file="drawer.jsp"%>
+
+
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
 				<th scope="col">#</th>
 				<th scope="col">Name</th>
-				<th scope="col">ID</th>
+				<th scope="col">Email</th>
 			</tr>
 		</thead>
 		<tbody>
+		<c:forEach items="${friendsList}" var = "friends">
 			<tr>
 				<th scope="row">1</th>
-				<td>"${name }"</td>
-				<td>Otto</td>
+				<td>"${friends.name}"</td>
+				<td>"${friends.email}"</td>
 			</tr>
-			<tr>
-				<th scope="row">2</th>
-				<td>Jacob</td>
-				<td>Thornton</td>
-			</tr>
-			<tr>
-				<th scope="row">3</th>
-				<td>Larry</td>
-				<td>the Bird</td>
-			</tr>
+		</c:forEach>
 		</tbody>
 	</table>
+
 </body>
 </html>

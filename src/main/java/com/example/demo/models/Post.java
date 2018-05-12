@@ -1,54 +1,93 @@
 package com.example.demo.models;
 
-import java.util.ArrayList;
+import javafx.geometry.Pos;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.Comparator;
+
+import javax.persistence.*;
 
 @Entity
-public class Post {
+public class Post implements Comparator{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-	
-	
-	private String username;
-	private long timestamp;
-	private ArrayList<Comment> commentList;
 
-	public String getUsername() {
-		return username;
+	private long userId;
+
+	private String imageUrl;
+
+	private String audioUrl;
+
+	private String textCaption;
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public String getAudioUrl() {
+		return audioUrl;
+	}
+
+	public void setAudioUrl(String audioUrl) {
+		this.audioUrl = audioUrl;
+	}
+
+	public String getTextCaption() {
+		return textCaption;
+	}
+
+	public void setTextCaption(String textCaption) {
+		this.textCaption = textCaption;
+	}
+
+	private long timestamp;
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 
 	public Integer getId() {
+
 		return id;
 	}
 
 	public void setId(Integer id) {
+
 		this.id = id;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
 	public long getTimestamp() {
+
 		return timestamp;
 	}
 
 	public void setTimestamp(long timestamp) {
+
 		this.timestamp = timestamp;
 	}
 
-	public ArrayList<Comment> getCommentList() {
-		return commentList;
-	}
 
-	public void setCommentList(ArrayList<Comment> commentList) {
-		this.commentList = commentList;
-	}
+	@Override
+	public int compare(Object o1, Object o2) {
+		Post p1 = (Post) o1;
+		Post p2 = (Post) o2;
 
+		if (p1.getTimestamp() > p2.getTimestamp()){
+			return -1;
+		}else if(p1.getTimestamp() < p2.getTimestamp()){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
 }

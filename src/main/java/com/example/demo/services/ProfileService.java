@@ -13,7 +13,9 @@ public class ProfileService {
 	ProfileRepository repository;
 	
 	public void saveProfile(Profile profile) {
-		repository.save(profile);
+		if (repository.findProfileByUserId(profile.getUserId()) == null) {
+			repository.save(profile);
+		}
 	}
 	
 	public Profile findProfile(String username) {

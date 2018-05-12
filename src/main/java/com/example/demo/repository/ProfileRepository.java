@@ -7,4 +7,7 @@ import com.example.demo.models.Profile;
 public interface ProfileRepository extends CrudRepository<Profile, Integer>{
 	
 	Profile findByUsername(String username);
+
+	Profile findProfileByUserId(long userId);
+
 }
