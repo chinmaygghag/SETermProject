@@ -1,8 +1,5 @@
 package com.example.demo.models;
 
-import javafx.geometry.Pos;
-
-import java.util.ArrayList;
 import java.util.Comparator;
 
 import javax.persistence.*;
