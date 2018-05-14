@@ -17,9 +17,15 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script
         src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<%@ include file="drawer.jsp"%>
 
-<table class="table" >
+<%@ include file="drawer.jsp"%>
+<nav class="navbar navbar-light bg-light"> <a
+        class="navbar-brand" href="#"> <img src="apple-touch-icon.png"
+                                            width="30" height="30" class="d-inline-block align-top" alt="">
+    Media Library
+</a> </nav>
+
+<table class="table">
     <thead class="thead-dark">
     <tr>
         <th scope="col">Message</th>
@@ -28,10 +34,9 @@
     </thead>
     <tbody>
     <c:forEach items="${list}" var="i">
-        <c:out value="i"></c:out>
     <tr>
         <td>${i.message}</td>
-        <td><a><button type="button" class="btn btn-primary" href="/viewSinglePost?postId=${i.postId}">View</button></a></td>
+        <td><a><button type="button" class="btn btn-primary" href="/view_post_from_notification?postId=${i.postId}&notificationId=${i.id}>View</button></a></td>
     </tr>
     </c:forEach>
     </tbody>

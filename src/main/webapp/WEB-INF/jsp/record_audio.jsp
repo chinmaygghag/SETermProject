@@ -102,6 +102,7 @@
 
 <form id="saveAudio" action="/savePost" method="POST" enctype="multipart/form-data">
     <input type="hidden" id="recording" name="recording">
+    <input type="text" name="caption">
     <input type="hidden" value="${param['image']}" name="imageFileUrl">
 </form>
 

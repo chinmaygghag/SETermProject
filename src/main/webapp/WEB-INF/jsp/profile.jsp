@@ -42,7 +42,7 @@
 		</div>
 	</div>
 
-
+	<a class="btn btn-primary" href="/updateProfile">Update Profile</a>
 
 
 </body>

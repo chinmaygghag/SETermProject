@@ -21,4 +21,8 @@ public class NotificationService {
         return notificationRepository.findByToBeNotified(id);
     }
 
+    public Notifications getNotification(int id){
+        return notificationRepository.findById(id);
+    }
+
 }

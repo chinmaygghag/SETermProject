@@ -11,4 +11,7 @@ import java.util.List;
 @Repository
 public interface NotificationRepository extends CrudRepository<Notifications, Integer> {
     List<Notifications> findByToBeNotified(long toBeNotified);
+
+    Notifications findById(int notificationId);
+
 }

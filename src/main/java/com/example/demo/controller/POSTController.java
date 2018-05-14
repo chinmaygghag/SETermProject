@@ -17,6 +17,7 @@ import com.example.demo.util.UtilityClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,6 +33,7 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
+import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -58,7 +60,7 @@ public class POSTController {
 	private NotificationService notificationService;
 
 
-	UtilityClass utilityClass = new UtilityClass();
+	private UtilityClass utilityClass = new UtilityClass();
 
 	@PostMapping(value = "/upload")
 	public ModelAndView uploadtoS3(@RequestParam("file") MultipartFile image) {
@@ -93,7 +95,8 @@ public class POSTController {
     @PostMapping(value = "/savePost")
     public ModelAndView saveAudioFile(HttpServletRequest request,
                                       @RequestParam("recording") String recording,
-									  @RequestParam("imageFileUrl") String imageUrl) throws Exception{
+									  @RequestParam("imageFileUrl") String imageUrl,
+									  @RequestParam("caption") String caption) throws Exception{
 
 		HttpSession session = request.getSession();
 		String audioFileUrl = "";
@@ -119,8 +122,6 @@ public class POSTController {
 
 			s3Client.putObject(putReq);
 			fileURI = "http://"+bucketName+".s3.amazonaws.com/"+utilityClass.uniqueTimeStamp()+username+".webm";
-
-
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -130,7 +131,7 @@ public class POSTController {
         post.setTimestamp(utilityClass.uniqueTimeStamp());
         Users users = userService.findUserByName(username);
         post.setUserId(users.getId());
-        post.setTextCaption("");
+        post.setTextCaption(caption);
         postService.savePosts(post);
 
 
@@ -193,7 +194,7 @@ public class POSTController {
 			e.printStackTrace();
 		}
 		System.out.println(fileURI);
-		modelAndView.addObject("image",imageFileUrl);
+		modelAndView.addObject("image",fileURI);
 		modelAndView.setViewName("redirect:/audioRecorder");
         System.out.println(image);
         return modelAndView;
@@ -236,6 +237,24 @@ public class POSTController {
 		Collections.sort(postList,new Post());
 		modelAndView.addObject("postList",postList);
 		modelAndView.setViewName("mypost");
+		return modelAndView;
+	}
+
+
+
+	@GetMapping(value = "/view_post_from_notification")
+	public ModelAndView viewNotificationPost(HttpServletRequest request,
+											 @RequestParam("postId") String postId,
+											 @RequestParam("notificationId") String notificationId){
+		ModelAndView modelAndView = new ModelAndView();
+
+		Notifications notifications = new Notifications();
+		notifications = notificationService.getNotification(Integer.parseInt(notificationId));
+		notifications.setVisited(true);
+		notificationService.saveNotification(notifications);
+
+		modelAndView.setViewName("redirect:/viewSinglePost?postId"+postId);
+
 		return modelAndView;
 	}
 
@@ -321,6 +340,15 @@ public class POSTController {
 		}else{
 
 		}
+
+	}
+
+
+	@GetMapping(value = "updateProfile")
+	public ModelAndView updateProfile(HttpServletRequest request){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/create_profile");
+		return modelAndView;
 
 	}
 

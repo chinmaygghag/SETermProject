@@ -26,6 +26,12 @@ pageEncoding="UTF-8"%>
             src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
     <%@ include file="drawer.jsp"%>
+    <nav class="navbar navbar-light bg-light"> <a
+            class="navbar-brand" href="#"> <img src="apple-touch-icon.png"
+                                                width="30" height="30" class="d-inline-block align-top" alt="">
+        Media Library
+    </a> </nav>
+
     <div class="container">
     <div class="row">
         <img src="${postAndComment.imageUrl}">

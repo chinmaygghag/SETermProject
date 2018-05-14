@@ -47,10 +47,18 @@
 
 
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 </head>
 <body>
 
     <%@ include file="drawer.jsp"%>
+    <nav class="navbar navbar-light bg-light"> <a
+            class="navbar-brand" href="#"> <img src="apple-touch-icon.png"
+                                                width="30" height="30" class="d-inline-block align-top" alt="">
+        Media Library
+    </a> </nav>
+
     <div class="container" style="margin: 15px">
 
         <div class="row">

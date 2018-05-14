@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Home</title>
-  	<link rel="stylesheet" href="css/home.css">
+  	<link rel="stylesheet" href="../../css/home.css">
 </head>
 
 <body>
@@ -43,13 +43,13 @@
           <a class="mdl-navigation__link" href="/showNotifications">Notifications</a>
         </nav>
       </div>
-      <main class="mdl-layout__content" >
+      <main style="margin-top: 500px" class="mdl-layout__content" >
       </main>
     </div>
   </body>
 </html>
   
-<script  src="js/home.js"></script>
+<script  src="../../js/home.js"></script>
 
 
 

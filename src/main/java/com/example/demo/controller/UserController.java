@@ -98,7 +98,8 @@ public class UserController {
 			for (int i = 0; i < eachFriend.length; i++) {
 				String[] friendsName = eachFriend[i].split("/");
 				Friends f = new Friends();
-				if(!userService.findFriendsExists(f.getFriendId(),userId)) {
+				if(!userService.findFriendsExists(f.getFriendId(),userId) &&
+						!friendsName[0].isEmpty()) {
 					f.setFriendId(Long.parseLong(friendsName[0]));
 					f.setName(friendsName[1]);
 					f.setUserId(userId);
@@ -126,14 +127,11 @@ public class UserController {
 			if(!received.get(i).isVisited()){
 				toBeDisplayed.add(received.get(i));
 			}
-
 		}
 
 		modelAndView.addObject("list",toBeDisplayed);
-
 		modelAndView.setViewName("notifications");
 		return modelAndView;
-
 
 	}
 	
