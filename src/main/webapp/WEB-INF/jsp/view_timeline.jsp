@@ -60,9 +60,9 @@
     </a> </nav>
 
     <div class="container-fluid" style="margin: 15px">
-
+        <c:forEach items="${postList}" var = "posts">
         <a href="/viewSinglePost?postId=${posts.id}">
-                <c:forEach items="${postList}" var = "posts">
+
                 <div class="card" style="width: 18rem;">
 
                     <img   class="card-img-top" src="${posts.imageUrl}"
@@ -74,9 +74,9 @@
                     </div>
 
                 </div>
-                </c:forEach>
-            </a>
 
+            </a>
+        </c:forEach>
 
     </div>
 

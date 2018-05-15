@@ -36,7 +36,7 @@
       <div class="mdl-layout__drawer" id="drawer">
         <span class="mdl-layout-title">Title</span>
         <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="#" id="clickme">Home</a>
+          <a class="mdl-navigation__link" href="/view_timeline" id="clickme">Home</a>
           <a class="mdl-navigation__link" href="/friends">Friends</a>
           <a class="mdl-navigation__link" href="/getProfile">Profile</a>
           <a class="mdl-navigation__link" href="/myPosts">Posts</a>

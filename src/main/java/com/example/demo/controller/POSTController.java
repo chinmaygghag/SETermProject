@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import com.example.demo.models.*;
 import com.example.demo.services.NotificationService;
@@ -117,11 +119,14 @@ public class POSTController {
 			AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(cred))
 					.withRegion(Regions.US_EAST_2).build();
 
-			PutObjectRequest putReq = new PutObjectRequest(bucketName, utilityClass.uniqueTimeStamp()+username+".webm",
+			String uniqueKey = utilityClass.uniqueTimeStamp() + "";
+
+
+			PutObjectRequest putReq = new PutObjectRequest(bucketName, uniqueKey+username+".webm",
 					new FileInputStream("postAudio.webm"), new ObjectMetadata()).withCannedAcl(CannedAccessControlList.PublicRead);
 
 			s3Client.putObject(putReq);
-			fileURI = "http://"+bucketName+".s3.amazonaws.com/"+utilityClass.uniqueTimeStamp()+username+".webm";
+			fileURI = "http://"+bucketName+".s3.amazonaws.com/"+uniqueKey+username+".webm";
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -180,12 +185,13 @@ public class POSTController {
 					secretKey);
 			AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(cred))
 					.withRegion(Regions.US_EAST_2).build();
+			String uniqueKey = utilityClass.uniqueTimeStamp() + "";
 
-			PutObjectRequest putReq = new PutObjectRequest(bucketName, utilityClass.uniqueTimeStamp()+".png",
+			PutObjectRequest putReq = new PutObjectRequest(bucketName, uniqueKey+".png",
 					new FileInputStream("postImage.png"), new ObjectMetadata()).withCannedAcl(CannedAccessControlList.PublicRead);
 
 			s3Client.putObject(putReq);
-			fileURI = "http://"+bucketName+".s3.amazonaws.com/"+utilityClass.uniqueTimeStamp()+".png";
+			fileURI = "http://"+bucketName+".s3.amazonaws.com/"+uniqueKey+".png";
 
 
 
@@ -217,8 +223,10 @@ public class POSTController {
 		List<Post> postList = new ArrayList<>();
 		for (int i=0;i<friendsList.size();i++){
 			postList.addAll(postService.getPostByUserId(friendsList.get(i).getFriendId()));
+			System.out.println("Before " +postList.size());
 		}
-
+		postList.stream().distinct().collect(Collectors.toList());
+		System.out.println("Before " +postList.size());
 		Collections.sort(postList,new Post());
 		modelAndView.addObject("postList",postList);
 		return modelAndView;

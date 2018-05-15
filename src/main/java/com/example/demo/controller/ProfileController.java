@@ -72,15 +72,22 @@ public class ProfileController {
 			String imgSrc = "http://" + bucketName + ".s3.amazonaws.com/" + image.getOriginalFilename();
 			profilePage.addObject("imgSrc", imgSrc);
 
-			profilePage.setViewName("redirect:/getProfile");
-
 			Profile profile = new Profile();
+
+			if (service.findProfile(username) != null){
+				profile.setId(service.findProfile(username).getId());
+			}
+
 			profile.setName(name);
 			profile.setProfileImageName(imgSrc);
 			profile.setUsername(username);
 			profile.setUserId(user.getId());
 			profile.setDescription(desc);
 			service.saveProfile(profile);
+
+			profilePage.setViewName("redirect:/getProfile");
+
+
 			return profilePage;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
