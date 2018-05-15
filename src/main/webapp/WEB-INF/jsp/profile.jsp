@@ -4,6 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <script
@@ -12,10 +16,7 @@
 </head>
 <body>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
 	<%@ include file="drawer.jsp"%>
 	<!-- Image and text -->
 	<nav class="navbar navbar-light bg-light"> <a
@@ -25,7 +26,7 @@
 	</a> </nav>
 
 
-	<div class="row" style="borderTop: 5px; padding: 15px;">
+	<div class="row" style="margin-left: 500px">
 		<div class="col-md-3">
 			<img alt="Profile Page Image" src="${profileImageName}" height="300"
 				width="300" class="img-fluid img-thumbnail">
@@ -40,9 +41,10 @@
 		</div>
 		<div>
 		</div>
+		<a  href="/updateProfile"><button type="button" class="mdl-button mdl-js-button mdl-button--raised">Update Profile</button></a>
 	</div>
 
-	<a class="btn btn-primary" href="/updateProfile">Update Profile</a>
+
 
 
 </body>

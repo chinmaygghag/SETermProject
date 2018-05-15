@@ -43,8 +43,8 @@
           <a class="mdl-navigation__link" href="/showNotifications">Notifications</a>
         </nav>
       </div>
-      <main style="margin-top: 500px" class="mdl-layout__content" >
-      </main>
+      <%--<main style="margin-top: 500px" class="mdl-layout__content" >
+      </main>--%>
     </div>
   </body>
 </html>

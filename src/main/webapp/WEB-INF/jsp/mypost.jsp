@@ -32,12 +32,9 @@
                      alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">${posts.textCaption}</h5>
-                        <p class="card-text">You can add a post with an image and with
-                        that you can even include audio or text.</p>
-                        <a class="btn btn-primary">Go somewhere</a>
+                        <a class="btn btn-primary">View Post</a>
                     </div>
-
-                </div>
+                    </div>
                 </a>
             </c:forEach>
         </div>

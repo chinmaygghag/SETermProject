@@ -59,22 +59,25 @@
         Media Library
     </a> </nav>
 
-    <div class="container" style="margin: 15px">
+    <div class="container-fluid" style="margin: 15px">
 
-        <div class="row">
-            <c:forEach var="i" items="${postList}">
-            <div class="col-md-4">
+        <a href="/viewSinglePost?postId=${posts.id}">
+                <c:forEach items="${postList}" var = "posts">
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="${i.imageUrl}"
-                         alt="Card image cap">
+
+                    <img   class="card-img-top" src="${posts.imageUrl}"
+                           alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Captions</h5>
-                        <p class="card-text">${i.textCaption}</p>
+                        <h5 class="card-title">${posts.textCaption}</h5>
+                        <h5 class="card-body">${posts.userId}</h5>
+                        <a class="btn btn-primary">View Post</a>
                     </div>
+
                 </div>
-            </div>
-            </c:forEach>
-        </div>
+                </c:forEach>
+            </a>
+
+
     </div>
 
 

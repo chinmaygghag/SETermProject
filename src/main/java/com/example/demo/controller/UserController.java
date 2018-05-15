@@ -31,12 +31,8 @@ public class UserController {
 	@Autowired
 	private NotificationService notificationService;
 
-	@Value("${DB_USER}")
-	String secretKey;
-
 	@GetMapping(value = "/")
 	public ModelAndView renderPage() {
-		System.out.print(secretKey);
 		ModelAndView indexPage = new ModelAndView();
 		indexPage.setViewName("index");
 		return indexPage;
@@ -70,7 +66,7 @@ public class UserController {
 				return new ModelAndView("error");
 			}
 		}else{
-			return new ModelAndView("admin");
+			return new ModelAndView("redirect:/admin");
 		}
 	}
 	
@@ -82,7 +78,7 @@ public class UserController {
 		ModelAndView modelAndView = new ModelAndView();
 		Users users = userService.findUserByName(username);
 		List<Friends> friendsList = userService.getFriendByUsername(users.getId());
-		modelAndView.addObject(friendsList);
+		modelAndView.addObject("friends",friendsList);
 		modelAndView.setViewName("friends");
 
 		return modelAndView;

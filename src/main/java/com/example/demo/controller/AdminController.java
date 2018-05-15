@@ -57,7 +57,7 @@ public class AdminController {
         adminService.deletePost(p);
 
 
-        return new ModelAndView("success");
+        return new ModelAndView("redirect:/admin");
 
     }
 

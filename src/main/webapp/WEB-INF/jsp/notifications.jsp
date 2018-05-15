@@ -4,6 +4,12 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script
@@ -13,10 +19,6 @@
 </head>
 <body>
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
 <%@ include file="drawer.jsp"%>
 <nav class="navbar navbar-light bg-light"> <a
@@ -30,13 +32,15 @@
     <tr>
         <th scope="col">Message</th>
         <th scope="col">View</th>
+        <th scope="col">Notification ID</th>
     </tr>
     </thead>
     <tbody>
     <c:forEach items="${list}" var="i">
     <tr>
         <td>${i.message}</td>
-        <td><a><button type="button" class="btn btn-primary" href="/view_post_from_notification?postId=${i.postId}&notificationId=${i.id}>View</button></a></td>
+        <td><a href="/view_post_from_notification?postId=${i.postId}&notificationId=${i.id}"> <button type="button" class="mdl-button mdl-js-button mdl-button--raised">View</button></a></td>
+        <td><c:out value="${i.id}"></c:out></td>
     </tr>
     </c:forEach>
     </tbody>

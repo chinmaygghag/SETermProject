@@ -146,7 +146,6 @@
 						<h5 class="card-title">You Can Add Post</h5>
 						<p class="card-text">You can add a post with an image and with
 							that you can even include audio or text.</p>
-						<a class="btn btn-primary">Go somewhere</a>
 					</div>
 				</div>
 			</div>
@@ -159,7 +158,6 @@
 						<h5 class="card-title">You Can Add Post</h5>
 						<p class="card-text">You can add a post with an image and with
 							that you can even include audio or text.</p>
-						<a class="btn btn-primary">Go somewhere</a>
 					</div>
 				</div>
 			</div>
@@ -171,7 +169,6 @@
 						<h5 class="card-title">You Can Add Post</h5>
 						<p class="card-text">You can add a post with an image and with
 							that you can even include audio or text.</p>
-						<a class="btn btn-primary">Go somewhere</a>
 					</div>
 				</div>
 			</div>

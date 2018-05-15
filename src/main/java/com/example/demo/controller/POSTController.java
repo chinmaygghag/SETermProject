@@ -226,6 +226,23 @@ public class POSTController {
 	}
 
 
+
+	@GetMapping(value = "/view_friends_profile")
+	public ModelAndView viewFriendsPosts(HttpServletRequest request,
+										 @RequestParam(value = "friendId") String friendId){
+		ModelAndView modelAndView = new ModelAndView();
+
+		List<Post> postList = new ArrayList<>();
+		postList = postService.getPostByUserId(Long.parseLong(friendId));
+		Collections.sort(postList,new Post());
+		modelAndView.addObject("postList",postList);
+		modelAndView.setViewName("mypost");
+
+
+		return modelAndView;
+	}
+
+
 	@GetMapping(value = "/myPosts")
 	public ModelAndView getMyPosts(HttpServletRequest request){
 		ModelAndView modelAndView = new ModelAndView();
@@ -253,7 +270,24 @@ public class POSTController {
 		notifications.setVisited(true);
 		notificationService.saveNotification(notifications);
 
-		modelAndView.setViewName("redirect:/viewSinglePost?postId"+postId);
+		Integer id =  Integer.parseInt(postId);
+		Post post = postService.getPostById(id);
+
+		modelAndView.addObject("post",post);
+
+		List<Comment> commentList = postService.getCommentByPostId(post.getId());
+
+		PostAndComment postAndComment = new PostAndComment();
+		postAndComment.setPostId(post.getId());
+		postAndComment.setImageUrl(post.getImageUrl());
+		postAndComment.setAudioUrl(post.getAudioUrl());
+		postAndComment.setTextCaption(post.getTextCaption());
+		postAndComment.setComments(commentList);
+
+
+		modelAndView.addObject("postAndComment",postAndComment);
+
+		modelAndView.setViewName("view_single_post");
 
 		return modelAndView;
 	}
@@ -347,7 +381,7 @@ public class POSTController {
 	@GetMapping(value = "updateProfile")
 	public ModelAndView updateProfile(HttpServletRequest request){
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/create_profile");
+		modelAndView.setViewName("create_profile");
 		return modelAndView;
 
 	}

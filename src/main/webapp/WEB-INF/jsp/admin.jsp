@@ -46,8 +46,8 @@
     <tbody>
     <c:forEach items="${admin.postList}" var="i">
         <tr>
-            <td>i.imageUrl</td>
-            <td><button type="button" class="btn btn-primary" href="/deletePost?postId=${i.postId}">Delete</button></td>
+            <td>${i.imageUrl}</td>
+            <td><a  href="/deletePost?postId=${i.id}"><button type="button" class="mdl-button mdl-js-button mdl-button--raised" >Delete</button></a></td>
         </tr>
     </c:forEach>
     </tbody>
